@@ -333,7 +333,7 @@ class FilamentShield
 
     protected function getDefaultPermissionIdentifierWithModel(string $resource): string
     {
-        return fn ($resource) => str($resource::getModel())
+        return str($resource::getModel())
             ->replace('_', '::')
             ->toString();
     }
