@@ -17,7 +17,7 @@ return [
 
     'super_admin' => [
         'enabled' => true,
-        'name' => 'super_admin',
+        'name' => 'super-admin',
         'define_via_gate' => false,
         'intercept_gate' => 'before', // after
     ],
@@ -30,17 +30,17 @@ return [
     'permission_prefixes' => [
         'resource' => [
             'view',
-            'view_any',
+            'viewAny',
             'create',
             'update',
             'restore',
-            'restore_any',
+            'restoreAny',
             'replicate',
             'reorder',
             'delete',
-            'delete_any',
-            'force_delete',
-            'force_delete_any',
+            'deleteAny',
+            'forceDelete',
+            'forceDeleteAny',
         ],
 
         'page' => 'page',

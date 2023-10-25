@@ -42,7 +42,7 @@ class FilamentShield
             return $identifier;
         }
 
-        return $this->getDefaultPermissionIdentifier($resource);
+        return $this->getDefaultPermissionIdentifierWithModel($resource);
     }
 
     public function generateForResource(array $entity): void
@@ -321,7 +321,7 @@ class FilamentShield
         return method_exists($class, 'getHeadingForShield');
     }
 
-    protected function getDefaultPermissionIdentifier(string $resource): string
+    protected function getDefaultPermissionIdentifierWithResources(string $resource): string
     {
         return Str::of($resource)
             ->afterLast('Resources\\')
@@ -329,5 +329,12 @@ class FilamentShield
             ->replace('\\', '')
             ->snake()
             ->replace('_', '::');
+    }
+
+    protected function getDefaultPermissionIdentifierWithModel(string $resource): string
+    {
+        return fn ($resource) => str($resource::getModel())
+            ->replace('_', '::')
+            ->toString();
     }
 }
