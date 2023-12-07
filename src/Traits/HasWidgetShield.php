@@ -15,9 +15,12 @@ trait HasWidgetShield
 
     protected static function getPermissionName(): string
     {
-        $prepend = Str::of(Utils::getWidgetPermissionPrefix())->append('_');
-
         return Str::of(class_basename(static::class))
-            ->prepend($prepend);
+            ->prepend(
+                Str::of(Utils::getWidgetPermissionPrefix())
+                    ->append('_')
+                    ->toString()
+            )
+            ->toString();
     }
 }

@@ -21,8 +21,6 @@
     </a>
 </p>
 
-<hr style="background-color: #ebb304" class="filament-hidden">
-
 # Shield
 
 The easiest and most intuitive way to add access management to your Filament Admin:
@@ -32,10 +30,11 @@ The easiest and most intuitive way to add access management to your Filament Adm
 - :fire: **Custom Permissions**
 
 
-> **Note** 
+> [!NOTE] 
 > For **Filament 2.x** use **[2.x](https://github.com/bezhanSalleh/filament-shield/tree/2.x)** branch
 
-<hr style="background-color: #ebb304">
+> [!IMPORTANT]
+> Prior to `v3.1.0` Shield supported [spatie/laravel-permission](https://packagist.org/packages/spatie/laravel-permission):`^5.0` and now it supports version `^6.0`. Which has some breaking changes around migrations. If you are upgrading from a version prior to `v3.1.0` please make sure to remove the old migration file and republish the new one.
 
 ## Installation
 
@@ -358,8 +357,8 @@ class AuthServiceProvider extends ServiceProvider
 
     ];
 ```
-#### Users
-Shield does not come with a way to assign roles to your users out of the box, however you can easily assign roles to your users using Filament `Forms`'s `Select` or `CheckboxList` component. Inside your users `Resrouce`'s form add one of these components and configure them as you need:
+#### Users (Assigning Roles to Users)
+Shield does not come with a way to assign roles to your users out of the box, however you can easily assign roles to your users using Filament `Forms`'s `Select` or `CheckboxList` component. Inside your users `Resource`'s form add one of these components and configure them as you need:
 ```php
 // Using Select Component
 Forms\Components\Select::make('roles')
@@ -378,6 +377,39 @@ You can find out more about these components in the [Filament Docs](https://fila
 
 - [Select](https://filamentphp.com/docs/3.x/forms/fields/select)
 - [CheckboxList](https://filamentphp.com/docs/3.x/forms/fields/checkbox-list)
+
+#### Layout Customization
+You can easily customize the `Grid`, `Section` and `CheckboxList`'s `columns()` and `columnSpan()` without publishing the resource.
+```php
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+
+public function panel(Panel $panel): Panel
+{
+        return $panel
+            ...
+            ...
+            ->plugins([
+                FilamentShieldPlugin::make()
+                    ->gridColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 3
+                    ])
+                    ->sectionColumnSpan(1)
+                    ->checkboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                        'lg' => 4,
+                    ])
+                    ->resourceCheckboxListColumns([
+                        'default' => 1,
+                        'sm' => 2,
+                    ]),
+            ]);
+}
+```
+<img width="1161" alt="Screenshot 2023-09-24 at 10 34 31 PM" src="https://github.com/bezhanSalleh/filament-shield/assets/10007504/be42bab2-72d1-4db0-8de4-8b8fba2d4e68">
+
 #### Translations 
 
 Publish the translations using:

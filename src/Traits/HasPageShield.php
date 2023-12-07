@@ -58,14 +58,17 @@ trait HasPageShield
 
     protected static function getPermissionName(): string
     {
-        $prepend = Str::of(Utils::getPagePermissionPrefix())->append('_');
-
         return Str::of(class_basename(static::class))
-            ->prepend($prepend);
+            ->prepend(
+                Str::of(Utils::getPagePermissionPrefix())
+                    ->append('_')
+                    ->toString()
+            )
+            ->toString();
     }
 
-    public static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(array $parameters = []): bool
     {
-        return static::canView() && static::$shouldRegisterNavigation;
+        return static::canView() && parent::shouldRegisterNavigation();
     }
 }
