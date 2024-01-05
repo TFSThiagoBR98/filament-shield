@@ -57,6 +57,7 @@ return [
 
     'generator' => [
         'option' => 'policies_and_permissions',
+        'policy_directory' => 'Policies',
     ],
 
     'exclude' => [
@@ -80,7 +81,7 @@ return [
     ],
 
     'register_role_policy' => [
-        'enabled' => true,
+        'enabled' => false,
     ],
 
 ];
